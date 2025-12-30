@@ -11,22 +11,45 @@
  */
 class Solution {
 public:
-    void SmallestK(TreeNode* root,int k,int &count,int &kthsmallest){
-        if(root==NULL) return;
-        // using preorder traversal -> as it is a property of BST , that preorder of BST is always in sorted order
-        SmallestK(root->left,k,count,kthsmallest);
-        count++;
-        if(count==k) {
-            kthsmallest = root->val;
-            return ;
-        }
-        SmallestK(root->right,k,count,kthsmallest);
-    }
     int kthSmallest(TreeNode* root, int k) {
-        
-        int kthsmallest = INT_MIN;
+        // until root exist 
         int count = 0;
-        SmallestK(root,k,count,kthsmallest);
-        return kthsmallest;
+        int ans = -1;
+        while(root){
+            // if left doesn't exist , so its included in inorder traversal -> increase the count
+            if(root->left==NULL){
+                count++;
+                if(count==k) ans = root->val;
+                root=root->right;
+            }
+            else{
+                // take a current pointer pointing the roots left
+                TreeNode* curr = root->left;
+
+                // go to the extreme right of left subtree to create the link
+                while(curr->right && curr->right!=root){
+                    curr=curr->right;
+                }
+
+                // check that link exist or not
+                // no link present
+                if(curr->right==NULL){
+                    // create a link
+                    curr->right = root;
+                    // and move root to its left for futher traversal
+                    root = root->left;
+                }
+                // if link is present
+                else{
+                    // break the link as left subtree is already done
+                    curr->right = NULL;
+                    count++;
+                    if(count==k) ans = root->val;
+                    // move root to its right
+                    root = root->right;
+                }
+            }
+        }
+        return ans;
     }
 };
