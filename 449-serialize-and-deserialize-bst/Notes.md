@@ -1,1 +1,1 @@
-<h2>serialize-and-deserialize-bst Notes</h2><hr>[ Time taken: 23 hrs 19 m 17 s ]
+<h2>serialize-and-deserialize-bst Notes</h2><hr>[ Time taken: 1 d 12 hrs 48 m 15 s ]
