@@ -10,12 +10,12 @@ public:
         }
 
         while(p.size()>1){
-            int heaviest = p.top();
+            int heaviest = p.top(); // first heaviest
             p.pop();
-            heaviest= heaviest-p.top();
+            heaviest= heaviest-p.top(); // subtract second heaviest from first 
             p.pop();
-            p.push(heaviest);
+            p.push(heaviest); // push remains back to the heap
         }
-        return p.top();
+        return p.top(); // return the last left stone
     }
 };
